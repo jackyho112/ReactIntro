@@ -14,7 +14,8 @@
     "test": "NODE_ENV=test jest",
     "update-test": "npm run test -- -u",
     "test-coverage": "npm run test -- --coverage",
-    "test-coverage-html": "open coverage/lcov-report/index.html"
+    "test-coverage-html": "open coverage/lcov-report/index.html",
+    "server": "NODE_ENV=server nodemon server.js"
   },
   "dependencies": {
     "axios": "0.15.2",
