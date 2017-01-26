@@ -1,3 +1,4 @@
+// remember to clear the cache
 import React from 'react'
 import { Provider } from 'react-redux'
 import Search, { Unwrapped as UnwrappedSearch } from './Search'
@@ -7,8 +8,8 @@ import { shallow, render } from 'enzyme'
 import { shallowToJson } from 'enzyme-to-json'
 import store from './store'
 import { setSearchTerm } from './actionCreators'
+import { matchShowWithSearchTerm } from './searchHelpers'
 
-// remember to clear the cache
 test('Search snapshot test', () => {
   const component = shallow(<UnwrappedSearch shows={preload.shows} searchTerm='' />)
   const tree = shallowToJson(component)
@@ -29,11 +30,9 @@ test('Search should render correct amount of shows based on search', () => {
     </Provider>
   )
 
-  const showCount = preload.shows.filter((show) => {
-    return `${show.title} ${show.description}`
-      .toUpperCase()
-      .indexOf(searchWord.toUpperCase()) >= 0
-  }).length
+  const matchShow = (show) => matchShowWithSearchTerm(searchWord, show)
+
+  const showCount = preload.shows.filter(matchShow).length
 
   expect(component.find('.show-card').length).toEqual(showCount)
 })

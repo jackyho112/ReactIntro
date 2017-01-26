@@ -15,7 +15,7 @@ const AsyncRoute = React.createClass({
 
   componentDidMount () {
     this.props.loadingPromise.then((module) => {
-      this.component = module.default
+      this.component = module.default // Since it won't change, we don't wanna put in a key React would check
       this.setState({loaded: true})
     })
   },

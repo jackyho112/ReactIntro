@@ -12,10 +12,10 @@ const ShowCard = React.createClass({
   },
 
   render () {
-    const { poster, title, year, description } = this.props
+    const { poster, title, year, description, imdbID } = this.props
 
     return (
-      <Link to={`/details/${this.props.imdbID}`}>
+      <Link to={`/details/${imdbID}`}>
         <div className='show-card'>
           <img src={`/public/img/posters/${poster}`} />
           <div>

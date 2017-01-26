@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import ShowCard from './ShowCard'
 import Header from './Header'
+import { matchShowWithSearchTerm } from './searchHelpers'
 const { arrayOf, shape, string } = React.PropTypes
 
 const Search = React.createClass({
@@ -15,25 +16,21 @@ const Search = React.createClass({
   },
 
   render () {
+    const matchShow = (show) => matchShowWithSearchTerm(this.props.searchTerm, show)
+
     return (
       <div className='search'>
-        <Header
-          showSearch
-        />
+        <Header showSearch />
 
         <div>
           {
             this.props.shows
-            .filter((show) => {
-              return `${show.title} ${show.description}`
-                .toUpperCase()
-                .indexOf(this.props.searchTerm.toUpperCase()) >= 0
-            })
-            .map((show) => {
-              return (
-                <ShowCard key={show.imdbID} {...show} />
-              )
-            })
+              .filter(matchShow)
+              .map((show) => {
+                return (
+                  <ShowCard key={show.imdbID} {...show} />
+                )
+              })
           }
         </div>
       </div>

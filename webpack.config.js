@@ -1,20 +1,38 @@
 const path = require('path')
+const webpack = require('webpack')
 
 module.exports = {
   context: __dirname,
   entry: './js/ClientApp.js',
-  devtool: 'eval',
   output: {
     path: path.join(__dirname, '/public'),
     filename: 'bundle.js',
     publicPath: '/public/'
   },
   devServer: {
-    publicPath: '/pubic',
+    publicPath: '/pubic/',
     historyApiFallback: true
   },
+  plugins: [
+    new webpack.optimize.UglifyJsPlugin({
+      beautify: false,
+      mangle: {
+        screw_ie8: true,
+        keep_fnames: true
+      },
+      compress: {
+        screw_ie8: true,
+        warnings: false
+      },
+      comments: false
+    })
+  ],
   resolve: {
-    extensions: ['.js', '.json']
+    extensions: ['.js', '.json'],
+    alias: {
+      react: 'preact-compat',
+      'react-dom': 'preact-compat'
+    }
   },
   stats: {
     colors: true,
@@ -34,7 +52,10 @@ module.exports = {
         loader: 'json-loader'
       },
       {
-        include: path.resolve(__dirname, 'js'),
+        include: [
+          path.resolve(__dirname, 'js'),
+          path.resolve('node_modules/preact-compat/src')
+        ],
         test: /\.js$/,
         loader: 'babel-loader'
       },
