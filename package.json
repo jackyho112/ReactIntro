@@ -1,7 +1,6 @@
 {
-  "name": "complete-intro-to-react",
+  "name": "A basic react app on Netflix show gallery",
   "version": "1.0.0",
-  "description": "A two day workshop on a complete intro to React",
   "main": "index.js",
   "author": "Brian Holt <btholt@gmail.com>",
   "license": "MIT",
@@ -66,18 +65,9 @@
   "directories": {
     "test": "test"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/btholt/complete-intro-to-react.git"
-  },
   "keywords": [
     "react",
-    "workshop",
     "intro",
     "redux"
   ],
-  "bugs": {
-    "url": "https://github.com/btholt/complete-intro-to-react/issues"
-  },
-  "homepage": "https://github.com/btholt/complete-intro-to-react#readme"
 }
